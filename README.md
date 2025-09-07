@@ -192,8 +192,7 @@ CREATE TABLE orders (
 |---------------|-----------|--------------|------------------|
 | 👨‍🎓 **Student** | `student@example.com` | `password123` | Full student features |
 | 👨‍💼 **Staff** | `staff@cafeteria.com` | `password123` | Full staff management |
-| 🚀 **Quick Test** | `test@test.com` | `test` | Student features |
-| 👑 **Admin** | `admin@admin.com` | `admin` | Staff management |
+
 
 ### **🎯 Demo Workflow**
 
