@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Cafeteria System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-coffee"></i>
+                <h1>University Cafeteria</h1>
+            </div>
+            <nav class="nav">
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-name"></span>
+                    <span id="user-type"></span>
+                    <button id="logout-btn" class="btn btn-outline">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="screen active">
+                <div class="welcome-content">
+                    <div class="welcome-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h2>Welcome to University Cafeteria</h2>
+                    <p>Advanced ordering system with loyalty points</p>
+                    <div class="welcome-buttons">
+                        <button class="btn btn-primary" onclick="showLogin('student')">
+                            <i class="fas fa-user-graduate"></i> Student Login
+                        </button>
+                        <button class="btn btn-secondary" onclick="showLogin('staff')">
+                            <i class="fas fa-user-tie"></i> Staff Login
+                        </button>
+                        <button class="btn btn-outline" onclick="showRegister()">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Screen -->
+            <div id="login-screen" class="screen">
+                <div class="login-container">
+                    <div class="login-header">
+                        <i class="fas fa-coffee"></i>
+                        <h2 id="login-title">Login</h2>
+                    </div>
+                    <form id="login-form" class="login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <button type="button" class="btn btn-outline btn-full" onclick="showWelcome()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Register Screen -->
+            <div id="register-screen" class="screen">
+                <div class="register-container">
+                    <div class="register-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h2>Create Account</h2>
+                    </div>
+                    <form id="register-form" class="register-form">
+                        <div class="form-group">
+                            <label for="reg-name">Name</label>
+                            <input type="text" id="reg-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Password</label>
+                            <input type="password" id="reg-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-type">User Type</label>
+                            <select id="user-type" name="userType" required>
+                                <option value="">Select user type</option>
+                                <option value="student">Student</option>
+                                <option value="staff">Staff</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                        <button type="button" class="btn btn-outline btn-full" onclick="showWelcome()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Student Dashboard -->
+            <div id="student-dashboard" class="screen">
+                <div class="dashboard-header">
+                    <h2>Student Dashboard</h2>
+                    <div class="loyalty-points">
+                        <i class="fas fa-star"></i>
+                        <span id="student-points">0</span>
+                        <span>loyalty points</span>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card" onclick="showMenu()">
+                        <i class="fas fa-utensils"></i>
+                        <h3>View Menu</h3>
+                        <p>Browse available food and drinks</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showOrderForm()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Place Order</h3>
+                        <p>Order from available menu</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showLoyaltyPoints()">
+                        <i class="fas fa-star"></i>
+                        <h3>Loyalty Points</h3>
+                        <p>View and redeem points</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showRedeemPoints()">
+                        <i class="fas fa-gift"></i>
+                        <h3>Redeem Points</h3>
+                        <p>Use your points for discounts</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Dashboard -->
+            <div id="staff-dashboard" class="screen">
+                <div class="dashboard-header">
+                    <h2>Staff Dashboard</h2>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card" onclick="showPendingOrders()">
+                        <i class="fas fa-clock"></i>
+                        <h3>Pending Orders</h3>
+                        <p>View orders awaiting processing</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showUpdateOrderStatus()">
+                        <i class="fas fa-edit"></i>
+                        <h3>Update Order Status</h3>
+                        <p>Change order status</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showSalesReport()">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Sales Report</h3>
+                        <p>View daily and weekly reports</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Screen -->
+            <div id="menu-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showStudentDashboard()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <h2>Menu</h2>
+                </div>
+                <div id="menu-items" class="menu-grid">
+                    <!-- Menu items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Order Form Screen -->
+            <div id="order-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showStudentDashboard()">
+                        <i class="fas fa-arrow-right"></i> Back
+                    </button>
+                    <h2>Place Order</h2>
+                </div>
+                <div class="order-container">
+                    <div class="order-menu">
+                        <h3>Select from Menu</h3>
+                        <div id="order-menu-items" class="menu-grid">
+                            <!-- Menu items for ordering -->
+                        </div>
+                    </div>
+                    <div class="order-cart">
+                        <h3>Cart</h3>
+                        <div id="cart-items" class="cart-items">
+                            <p class="empty-cart">Cart is empty</p>
+                        </div>
+                        <div class="cart-total">
+                            <div class="total-row">
+                                <span>Total:</span>
+                                <span id="cart-total">$0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Points Earned:</span>
+                                <span id="points-earned">0</span>
+                            </div>
+                        </div>
+                        <button id="place-order-btn" class="btn btn-primary btn-full" disabled>
+                            <i class="fas fa-check"></i> Confirm Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loyalty Points Screen -->
+            <div id="loyalty-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showStudentDashboard()">
+                        <i class="fas fa-arrow-right"></i> Back
+                    </button>
+                    <h2>Loyalty Points</h2>
+                </div>
+                <div class="loyalty-container">
+                    <div class="loyalty-card">
+                        <div class="loyalty-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="loyalty-info">
+                            <h3>Your Current Points</h3>
+                            <div class="points-display">
+                                <span id="current-points">0</span>
+                                <span>points</span>
+                            </div>
+                            <p>Earn 1 point for every $10 spent</p>
+                        </div>
+                    </div>
+                    <div class="loyalty-actions">
+                        <button class="btn btn-primary" onclick="showRedeemPoints()">
+                            <i class="fas fa-gift"></i> Redeem Points
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redeem Points Screen -->
+            <div id="redeem-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showLoyaltyPoints()">
+                        <i class="fas fa-arrow-right"></i> Back
+                    </button>
+                    <h2>Redeem Points</h2>
+                </div>
+                <div class="redeem-container">
+                    <div class="redeem-form">
+                        <div class="form-group">
+                            <label for="points-to-redeem">Number of Points to Redeem (Minimum 10)</label>
+                            <input type="number" id="points-to-redeem" min="10" value="10">
+                        </div>
+                        <div class="redeem-value">
+                            <span>Points Value: $<span id="redeem-value">0.00</span></span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startRedeemProcess()">
+                            <i class="fas fa-gift"></i> Start Redemption
+                        </button>
+                    </div>
+                    <div class="redeem-menu">
+                        <h3>Select from Menu</h3>
+                        <div id="redeem-menu-items" class="menu-grid">
+                            <!-- Menu items for redemption -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Orders Screen -->
+            <div id="pending-orders-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showStaffDashboard()">
+                        <i class="fas fa-arrow-right"></i> Back
+                    </button>
+                    <h2>Pending Orders</h2>
+                </div>
+                <div id="pending-orders-list" class="orders-list">
+                    <!-- Pending orders will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Update Order Status Screen -->
+            <div id="update-order-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showStaffDashboard()">
+                        <i class="fas fa-arrow-right"></i> Back
+                    </button>
+                    <h2>Update Order Status</h2>
+                </div>
+                <div class="update-order-container">
+                    <div class="form-group">
+                        <label for="order-id">Order ID</label>
+                        <input type="number" id="order-id" placeholder="Enter Order ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-status">New Status</label>
+                        <select id="new-status">
+                            <option value="">Select Status</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="PREPARING">Preparing</option>
+                            <option value="READY_FOR_PICKUP">Ready for Pickup</option>
+                            <option value="CANCELLED">Cancelled</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="updateOrderStatus()">
+                        <i class="fas fa-save"></i> Update Status
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sales Report Screen -->
+            <div id="sales-report-screen" class="screen">
+                <div class="screen-header">
+                    <button class="btn btn-outline" onclick="showStaffDashboard()">
+                        <i class="fas fa-arrow-right"></i> Back
+                    </button>
+                    <h2>Sales Report</h2>
+                </div>
+                <div class="report-container">
+                    <div class="report-options">
+                        <button class="btn btn-primary" onclick="generateReport('daily')">
+                            <i class="fas fa-calendar-day"></i> Daily Report
+                        </button>
+                        <button class="btn btn-secondary" onclick="generateReport('weekly')">
+                            <i class="fas fa-calendar-week"></i> Weekly Report
+                        </button>
+                    </div>
+                    <div id="report-content" class="report-content">
+                        <!-- Report content will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message"></span>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-coffee fa-spin"></i>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
