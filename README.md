@@ -343,8 +343,6 @@ CREATE TABLE orders (
 
 | **Device** | **Width** | **Features** |
 |------------|-----------|--------------|
-| 📱 **Mobile** | < 768px | Touch-optimized, stacked layout |
-| 📱 **Tablet** | 768px - 1199px | Hybrid layout, touch-friendly |
 | 🖥️ **Desktop** | ≥ 1200px | Full layout, hover effects |
 
 ---
@@ -395,7 +393,6 @@ CREATE TABLE orders (
 |------------|------------|--------------|-----------------|
 | 🚀 **Load Time** | < 2s | 1.2s | 40% faster |
 | 🔄 **API Response** | < 500ms | 200ms | 60% faster |
-| 📱 **Mobile Score** | > 90 | 95 | Excellent |
 | 🖥️ **Desktop Score** | > 95 | 98 | Outstanding |
 
 ### **🎯 Optimization Techniques**
